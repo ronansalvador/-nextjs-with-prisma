@@ -11,27 +11,35 @@ type User = {
 
 interface UserContextProps {
   user: User
-  changeUser: () => void
+  changeUser: (user: User) => void // Correção na tipagem da função changeUser
 }
 
 const UserContext = createContext<UserContextProps>({
-  user: (localStorage.getItem('user') as unknown as User) || '',
+  user: { name: '', email: '', token: '' }, // Define um estado inicial válido
   changeUser: () => {},
 })
 
-export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  // const isBrowser = typeof window !== "undefined";{
+export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User>({ name: '', email: '', token: '' })
 
-  const changeUser = () => {
-    const newUser = { name: '', email: '', token: '' }
-    setUser(newUser) // Atualize o estado local primeiro
-    saveUser(newUser) // E depois chama a função para salvar no localStorage
+  const changeUser = async (newUser: User) => {
+    setUser(newUser) // Usa o newUser passado como parâmetro
+    // Usa o newUser passado como parâmetro
+    saveUser(JSON.stringify(newUser)) // E depois chama a função para salvar no localStorage
   }
 
   useEffect(() => {
-    const savedUser = localStorage.getItem('theme') || 'light'
-    // setUser(savedTheme as User)
+    // Isso será executado após `user` ser atualizado
+    if (user && (user.name || user.email || user.token)) {
+      saveUser(JSON.stringify(user)) // Salva no localStorage após a atualização do estado
+    }
+  }, [user]) // A dependência deste efeito é o estado `user`
+
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user')
+    if (savedUser) {
+      setUser(JSON.parse(savedUser)) // Carrega o estado inicial do `localStorage`
+    }
   }, [])
 
   return (

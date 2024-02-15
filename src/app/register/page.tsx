@@ -1,15 +1,8 @@
 'use client'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useUser } from '../context/userContext'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-
-interface UserType {
-  id: Number | String
-  name: string
-  email: string
-  password: string
-}
 
 type User = {
   id?: number
@@ -18,26 +11,21 @@ type User = {
   token: string
 }
 
-interface ServerResponse {
-  user: User
-}
-
-const LoginPage = () => {
+const RegisterPage = () => {
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { user, changeUser } = useUser()
 
-  const logar = async (e: React.FormEvent) => {
+  const registrar = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('entrou')
-
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch('http://localhost:3000/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ name: username, email, password }),
       })
 
       if (!response.ok) {
@@ -45,19 +33,28 @@ const LoginPage = () => {
       }
 
       const newUser: User = await response.json()
-      console.log('newUser', newUser)
 
       changeUser(newUser)
     } catch (error) {
       if (error instanceof Error) {
-        console.error('Erro ao fazer login:', error.message)
+        console.log(error)
+        console.error('Erro ao Registrar:', error.message)
       }
     }
   }
   return (
     <div>
-      <h1>Login</h1>
-      <form onSubmit={logar}>
+      <h1>Registro</h1>
+      <form onSubmit={registrar}>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Digite seu nome"
+          value={username}
+          onChange={({ target }) => setUsername(target.value)}
+          autoComplete="username"
+        />
         <input
           type="email"
           name="email"
@@ -76,12 +73,12 @@ const LoginPage = () => {
           onChange={({ target }) => setPassword(target.value)}
           autoComplete="current-password"
         />
-        <button type="submit">Logar</button>
-        <Link href="/register">Registrar</Link>
+        <button type="submit">Regisrar</button>
+        <Link href="/login">Fazer Login</Link>
       </form>
       {user.name && redirect('/')}
     </div>
   )
 }
 
-export default LoginPage
+export default RegisterPage

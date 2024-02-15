@@ -42,6 +42,8 @@ export const newToken = (data: userCreateToken) => {
 export async function POST(req: Request) {
   const { name, email, password } = await req.json()
 
+  console.log(name, email, password)
+
   try {
     const decrypt = createPassword(password)
     const register: UserReturn = await prisma.user.create({
@@ -52,9 +54,20 @@ export async function POST(req: Request) {
       },
     })
 
+    console.log(register)
+
+    // const { password: _, ...userWithoutPassword } = register
+    // const token = newToken(userWithoutPassword)
+    // console.log({ ...userWithoutPassword, token })
+    // return Response.json({ ...userWithoutPassword, token })
     const { password: _, ...userWithoutPassword } = register
     const token = newToken(userWithoutPassword)
-    return Response.json({ ...userWithoutPassword, token })
+
+    return NextResponse.json(
+      { ...userWithoutPassword, token },
+
+      { status: 200 },
+    )
   } catch (error) {
     return NextResponse.json(
       {
