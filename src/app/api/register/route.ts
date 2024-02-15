@@ -31,7 +31,7 @@ const createPassword = (password: string) => {
   return newHash
 }
 
-export const newToken = (data: userCreateToken) => {
+const newToken = (data: userCreateToken) => {
   const token = jwt.sign({ data }, 'teste-ronan', {
     expiresIn: '7d',
     algorithm: 'HS256',

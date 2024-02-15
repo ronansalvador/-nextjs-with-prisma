@@ -1,12 +1,21 @@
 import prisma from '@/lib/db'
 import { NextResponse } from 'next/server'
 import { createHash } from 'node:crypto'
-import { newToken } from '../register/route'
+import { userCreateToken } from '../register/route'
+const jwt = require('jsonwebtoken')
 
 const compareHash = (password: string, originalHash: string) => {
   const newHash = createHash('md5').update(password).digest('hex')
 
   return newHash === originalHash
+}
+
+const newToken = (data: userCreateToken) => {
+  const token = jwt.sign({ data }, 'teste-ronan', {
+    expiresIn: '7d',
+    algorithm: 'HS256',
+  })
+  return token
 }
 
 export async function POST(req: Request) {
