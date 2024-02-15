@@ -11,7 +11,6 @@ const compareHash = (password: string, originalHash: string) => {
 
 export async function POST(req: Request) {
   const { email, password } = await req.json()
-  console.log(email, password)
 
   try {
     const user = await prisma.user.findUnique({
@@ -32,7 +31,7 @@ export async function POST(req: Request) {
     const hashOriginal = user.password
     const decrypt = compareHash(password, hashOriginal)
     if (decrypt !== true) {
-      console.log('esta dando erro aqui de senha')
+      ;('esta dando erro aqui de senha')
       return NextResponse.json(
         {
           message: 'Senha incorreta',

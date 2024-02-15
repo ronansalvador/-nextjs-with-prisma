@@ -26,13 +26,13 @@ const LoginPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { user, changeUser } = useUser()
+  const URL = process.env.NEXT_PUBLIC_URL_API
 
   const logar = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('entrou')
 
     try {
-      const response = await fetch('http://localhost:3000/api/login', {
+      const response = await fetch(`${URL}/api/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +45,6 @@ const LoginPage = () => {
       }
 
       const newUser: User = await response.json()
-      console.log('newUser', newUser)
 
       changeUser(newUser)
     } catch (error) {

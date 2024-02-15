@@ -16,11 +16,12 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { user, changeUser } = useUser()
+  const URL = process.env.NEXT_PUBLIC_URL_API
 
   const registrar = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:3000/api/register', {
+      const response = await fetch(`${URL}/api/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +38,6 @@ const RegisterPage = () => {
       changeUser(newUser)
     } catch (error) {
       if (error instanceof Error) {
-        console.log(error)
         console.error('Erro ao Registrar:', error.message)
       }
     }

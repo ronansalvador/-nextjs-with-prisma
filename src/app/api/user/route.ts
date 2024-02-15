@@ -21,7 +21,7 @@ export async function POST(req: Request) {
 
   try {
     const user = await prisma.user.create({ data: { name, email, password } })
-    console.log(user)
+
     return Response.json({ user })
   } catch (error) {
     return NextResponse.json(
