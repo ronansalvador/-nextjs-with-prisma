@@ -1,0 +1,18 @@
+.page_login {
+  background-color: black;
+  color: white;
+  text-align: center;
+  height: 100vh;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.form_login {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  width: 50%;
+  margin-inline: auto;
+}

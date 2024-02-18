@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     if (!user) {
       return NextResponse.json(
         {
-          message: 'Email inválido',
+          message: 'Login e/ou senha incorretos.',
         },
         { status: 404 },
       )
@@ -40,10 +40,10 @@ export async function POST(req: Request) {
     const hashOriginal = user.password
     const decrypt = compareHash(password, hashOriginal)
     if (decrypt !== true) {
-      ;('esta dando erro aqui de senha')
+      console.log('esta aqui')
       return NextResponse.json(
         {
-          message: 'Senha incorreta',
+          message: 'Login e/ou senha incorretos.',
         },
         { status: 404 },
       )

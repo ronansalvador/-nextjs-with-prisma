@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import { useUser } from '../context/userContext'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import styles from './style.module.css'
 
 interface UserType {
   id: Number | String
@@ -28,9 +31,14 @@ const LoginPage = () => {
   const { user, changeUser } = useUser()
   const URL = process.env.NEXT_PUBLIC_URL_API
 
+  const showToastError = (mensagem: string) => {
+    toast.error(mensagem, {
+      position: 'top-right',
+    })
+  }
+
   const logar = async (e: React.FormEvent) => {
     e.preventDefault()
-
     try {
       const response = await fetch(`${URL}/api/login`, {
         method: 'POST',
@@ -41,11 +49,11 @@ const LoginPage = () => {
       })
 
       if (!response.ok) {
-        throw new Error(`Erro na solicitação: ${response.statusText}`)
+        const error = await response.json()
+        showToastError(error.message)
       }
 
       const newUser: User = await response.json()
-
       changeUser(newUser)
     } catch (error) {
       if (error instanceof Error) {
@@ -54,9 +62,9 @@ const LoginPage = () => {
     }
   }
   return (
-    <div>
+    <div className={styles.page_login}>
       <h1>Login</h1>
-      <form onSubmit={logar}>
+      <form onSubmit={logar} className={styles.form_login}>
         <input
           type="email"
           name="email"
@@ -78,6 +86,7 @@ const LoginPage = () => {
         <button type="submit">Logar</button>
         <Link href="/register">Registrar</Link>
       </form>
+      <ToastContainer />
       {user.name && redirect('/')}
     </div>
   )
