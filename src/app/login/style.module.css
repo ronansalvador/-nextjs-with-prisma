@@ -3,7 +3,7 @@
   color: white;
   text-align: center;
   height: 100vh;
-  padding: 4rem;
+  padding-block: 4rem;
   display: flex;
   flex-direction: column;
   gap: 4rem;
@@ -13,6 +13,52 @@
   display: flex;
   flex-direction: column;
   gap: 4rem;
-  width: 50%;
+  width: 80%;
   margin-inline: auto;
+}
+
+.form_buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form_buttons * {
+  width: 45%;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: black;
+  border-radius: 0.5rem;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.form_buttons button {
+  background-color: #14c871;
+}
+
+.form_buttons button:hover {
+  background-color: teal;
+}
+
+.form_buttons a {
+  background-color: teal;
+}
+
+.form_buttons a:hover {
+  background-color: #14c871;
+}
+
+@media (min-width: 48em) {
+  .form_login {
+    max-width: 40rem;
+  }
+}
+
+@media (min-width: 80em) {
 }

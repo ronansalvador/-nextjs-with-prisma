@@ -83,8 +83,10 @@ const LoginPage = () => {
           onChange={({ target }) => setPassword(target.value)}
           autoComplete="current-password"
         />
-        <button type="submit">Logar</button>
-        <Link href="/register">Registrar</Link>
+        <div className={styles.form_buttons}>
+          <button type="submit">Logar</button>
+          <Link href="/register">Registrar</Link>
+        </div>
       </form>
       <ToastContainer />
       {user.name && redirect('/')}
