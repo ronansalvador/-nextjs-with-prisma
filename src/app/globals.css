@@ -68,7 +68,11 @@ address {
 
 input {
   width: 100%;
-  background-color: #9fa6ac;
+  background-color: #f2f5fd;
   padding: 10px;
   border-radius: 0.5rem;
+}
+
+input::placeholder {
+  color: #9fa6ac;
 }
