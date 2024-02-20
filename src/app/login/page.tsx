@@ -62,9 +62,9 @@ const LoginPage = () => {
     }
   }
   return (
-    <div className={styles.page_login}>
+    <section className="section_page">
       <h1>Login</h1>
-      <form onSubmit={logar} className={styles.form_login}>
+      <form onSubmit={logar} className="form_login">
         <input
           type="email"
           name="email"
@@ -83,14 +83,14 @@ const LoginPage = () => {
           onChange={({ target }) => setPassword(target.value)}
           autoComplete="current-password"
         />
-        <div className={styles.form_buttons}>
+        <div className="form_buttons">
           <button type="submit">Logar</button>
           <Link href="/register">Registrar</Link>
         </div>
       </form>
       <ToastContainer />
       {user.name && redirect('/')}
-    </div>
+    </section>
   )
 }
 

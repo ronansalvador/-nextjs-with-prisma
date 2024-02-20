@@ -13,8 +13,10 @@ export default function Home() {
     <main className={styles.main}>
       <h1>Home</h1>
       {user.name === '' && redirect('/login')}
-      <p>{user?.name}</p>
-      <button onClick={logout}>Sair</button>
+      <p>Olá {user?.name} seja bem vindo(a)!</p>
+      <button onClick={logout} className={styles.logout_btn}>
+        Sair
+      </button>
     </main>
   )
 }

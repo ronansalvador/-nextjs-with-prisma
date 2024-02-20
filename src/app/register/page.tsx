@@ -43,9 +43,9 @@ const RegisterPage = () => {
     }
   }
   return (
-    <div>
+    <section className="section_page">
       <h1>Registro</h1>
-      <form onSubmit={registrar}>
+      <form onSubmit={registrar} className="form_login">
         <input
           type="text"
           name="username"
@@ -73,11 +73,14 @@ const RegisterPage = () => {
           onChange={({ target }) => setPassword(target.value)}
           autoComplete="current-password"
         />
-        <button type="submit">Regisrar</button>
-        <Link href="/login">Fazer Login</Link>
+        <div className="form_buttons">
+          <button type="submit">Registrar</button>
+          <Link href="/login">Fazer Login</Link>
+        </div>
       </form>
+
       {user.name && redirect('/')}
-    </div>
+    </section>
   )
 }
 
