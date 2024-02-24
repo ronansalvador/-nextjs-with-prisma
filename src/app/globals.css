@@ -17,6 +17,7 @@ body {
 
 body {
   -webkit-font-smoothing: antialiased;
+  background-color: black;
 }
 
 img,
@@ -78,11 +79,10 @@ input::placeholder {
 }
 
 .section_page {
-  background-color: black;
   color: white;
   text-align: center;
-  height: 100vh;
-  padding-block: 4rem;
+  /* height: 100vh; */
+  /* padding-block: 4rem; */
   display: flex;
   flex-direction: column;
   gap: 4rem;

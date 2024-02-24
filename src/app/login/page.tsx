@@ -63,6 +63,7 @@ const LoginPage = () => {
   }
   return (
     <section className="section_page">
+      <ToastContainer />
       <h1>Login</h1>
       <form onSubmit={logar} className="form_login">
         <input
@@ -74,6 +75,7 @@ const LoginPage = () => {
           onChange={({ target }) => setEmail(target.value)}
           autoComplete="username"
         />
+
         <input
           type="password"
           name="password"
@@ -88,7 +90,6 @@ const LoginPage = () => {
           <Link href="/register">Registrar</Link>
         </div>
       </form>
-      <ToastContainer />
       {user.name && redirect('/')}
     </section>
   )
