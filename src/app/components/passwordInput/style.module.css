@@ -5,12 +5,15 @@
 .show_password {
   position: absolute;
   top: 0.5rem;
-  right: 0;
+  right: 0.5rem;
   width: 2rem;
   height: 2rem;
   background-color: transparent;
   border: none;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .show_password img {

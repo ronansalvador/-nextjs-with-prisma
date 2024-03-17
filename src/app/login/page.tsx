@@ -5,7 +5,6 @@ import { redirect } from 'next/navigation'
 import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import styles from './style.module.css'
 import PasswordInput from '../components/passwordInput'
 
 interface UserType {
