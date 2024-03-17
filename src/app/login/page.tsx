@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import styles from './style.module.css'
+import PasswordInput from '../components/passwordInput'
 
 interface UserType {
   id: Number | String
@@ -75,15 +76,10 @@ const LoginPage = () => {
           onChange={({ target }) => setEmail(target.value)}
           autoComplete="username"
         />
-
-        <input
-          type="password"
-          name="password"
-          id="password"
+        <PasswordInput
+          passwordValue={password}
           placeholder="digite sua senha"
-          value={password}
-          onChange={({ target }) => setPassword(target.value)}
-          autoComplete="current-password"
+          setPassword={setPassword}
         />
         <div className="form_buttons">
           <button type="submit">Logar</button>
